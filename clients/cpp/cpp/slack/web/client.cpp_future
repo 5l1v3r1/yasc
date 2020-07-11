@@ -1,0 +1,1850 @@
+﻿#include "slack/web/client.h"
+
+namespace slack::xml {
+
+SlackResponse WebClient::admin_apps_approve(
+    app_id: str = None, request_id : str = None, ** kwargs
+) {
+    /*Approve an app for installation on a workspace.
+
+    Either app_id or request_id is required.
+    These IDs can be obtained either directly via the app_requested event,
+    or by the admin.apps.requests.list method.
+
+    Args:
+        app_id (str): The id of the app to approve. e.g. 'A12345'
+        request_id (str): The id of the request to approve. e.g. 'Ar12345'
+    Raises:
+        SlackRequestError: If niether or both the `app_id` and `request_id` args are specified.
+    */
+    if app_id:
+    kwargs.update({ "app_id": app_id })
+        elif request_id :
+    kwargs.update({ "request_id": request_id })
+    else:
+    raise e.SlackRequestError(
+        "The app_id or request_id argument must be specified."
+    )
+
+        return self.api_call("admin.apps.approve", json = kwargs)
+}
+
+SlackResponse WebClient::admin_apps_requests_list(Json::Value kwargs) {
+    /*List app requests for a team/workspace.*/
+    return self.api_call("admin.apps.requests.list", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::admin_apps_restrict(Json::Value kwargs) {
+    /*Restrict an app for installation on a workspace.*/
+    return self.api_call("admin.apps.restrict", json = kwargs)
+}
+
+SlackResponse WebClient::admin_users_session_reset(
+    user_id: str, ** kwargs
+) {
+    /*Wipes all valid sessions on all devices for a given user.
+
+    Args:
+        user_id (str): The ID of the user to wipe sessions for. e.g. 'W12345678'
+    */
+    kwargs.update({ "user_id": user_id })
+        return self.api_call("admin.users.session.reset", json = kwargs)
+}
+
+SlackResponse WebClient::admin_inviteRequests_approve(
+    invite_request_id: str, ** kwargs
+) {
+    /*Approve a workspace invite request.
+
+    team_id is required if your Enterprise Grid org contains more than one workspace.
+
+    Args:
+        invite_request_id (str): ID of the request to invite. e.g. 'Ir1234'
+    */
+    kwargs.update({ "invite_request_id": invite_request_id })
+        return self.api_call("admin.inviteRequests.approve", json = kwargs)
+}
+
+SlackResponse WebClient::admin_inviteRequests_approved_list(
+    Json::Value kwargs
+) {
+    /*List all approved workspace invite requests.*/
+    return self.api_call("admin.inviteRequests.approved.list", json = kwargs)
+}
+
+SlackResponse WebClient::admin_inviteRequests_denied_list(
+    Json::Value kwargs
+) {
+    /*List all denied workspace invite requests.*/
+    return self.api_call("admin.inviteRequests.denied.list", json = kwargs)
+}
+
+SlackResponse WebClient::admin_inviteRequests_deny(
+    invite_request_id: str, ** kwargs
+) {
+    /*Deny a workspace invite request.
+
+    Args:
+        invite_request_id (str): ID of the request to invite. e.g. 'Ir1234'
+    */
+    kwargs.update({ "invite_request_id": invite_request_id })
+        return self.api_call("admin.inviteRequests.deny", json = kwargs)
+}
+
+SlackResponse WebClient::admin_inviteRequests_list(Json::Value kwargs) {
+    /*List all pending workspace invite requests.*/
+    return self.api_call("admin.inviteRequests.list", json = kwargs)
+}
+
+SlackResponse WebClient::admin_teams_admins_list(
+    team_id: str, ** kwargs
+) {
+    /*List all of the admins on a given workspace.
+
+    Args:
+        team_id (str): ID of the team.
+    */
+    kwargs.update({ "team_id": team_id })
+        return self.api_call("admin.teams.admins.list", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::admin_teams_create(
+    team_domain: str, team_name : str, ** kwargs
+) {
+    /*Create an Enterprise team.
+
+    Args:
+        team_domain (str): Team domain. e.g. 'slacksoftballteam'
+        team_name (str): Team name. e.g. 'Slack Softball Team'
+    */
+    kwargs.update({ "team_domain": team_domain, "team_name" : team_name })
+        return self.api_call("admin.teams.create", json = kwargs)
+}
+
+SlackResponse WebClient::admin_teams_list(Json::Value kwargs) {
+    /*List all teams on an Enterprise organization.*/
+    return self.api_call("admin.teams.list", json = kwargs)
+}
+
+SlackResponse WebClient::admin_teams_owners_list(
+    team_id: str, ** kwargs
+) {
+    /*List all of the admins on a given workspace.
+
+    Args:
+        team_id (str): ID of the team.
+    */
+    kwargs.update({ "team_id": team_id })
+        return self.api_call("admin.teams.owners.list", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::admin_teams_settings_setDescription(
+    team_id: str, description : str, ** kwargs
+) {
+    /*Set the description of a given workspace.
+
+    Args:
+        team_id (str): ID of the team.
+        description (str): Description of the team.
+    */
+    kwargs.update({ "team_id": team_id, "description" : description })
+        return self.api_call("admin.teams.settings.setDescription", json = kwargs)
+}
+
+SlackResponse WebClient::admin_teams_settings_setIcon(
+    team_id: str, image_url : str, ** kwargs
+) {
+    /*Sets the icon of a workspace.
+
+    Args:
+        team_id (str): ID of the team.
+        image_url (str): Url of the icon.
+    */
+    kwargs.update({ "team_id": team_id, "image_url" : image_url })
+        return self.api_call(
+}
+"admin.teams.settings.setIcon", http_verb = "GET", params = kwargs
+)
+
+SlackResponse WebClient::admin_teams_settings_setName(
+    team_id: str, name : str, ** kwargs
+) {
+    /*Sets the icon of a workspace.
+
+    Args:
+        team_id (str): ID of the team.
+        name (str): Name of the team.
+    */
+    kwargs.update({ "team_id": team_id, "name" : name })
+        return self.api_call("admin.teams.settings.setName", json = kwargs)
+}
+
+SlackResponse WebClient::admin_users_assign(
+    team_id: str, user_id : str, ** kwargs
+) {
+    /*Add an Enterprise user to a workspace.
+
+    Args:
+        team_id (str): ID of the team. e.g. 'T1234'
+        user_id (str): ID of the user to add to the workspace.
+    */
+    kwargs.update({ "team_id": team_id, "user_id" : user_id })
+        return self.api_call("admin.users.assign", json = kwargs)
+}
+
+SlackResponse WebClient::admin_users_invite(
+    team_id: str, email : str, channel_ids : List[str], ** kwargs
+) {
+    /*Invite a user to a workspace.
+
+    Args:
+        team_id (str): ID of the team. e.g. 'T1234'
+        email (str): The email address of the person to invite. e.g. 'joe@email.com'
+        channel_ids (list): A list of channel_ids for this user to join.
+            At least one channel is required. e.g. ['C1A2B3C4D', 'C26Z25Y24']
+    */
+    kwargs.update({ "team_id": team_id, "email" : email, "channel_ids" : channel_ids })
+        return self.api_call("admin.users.invite", json = kwargs)
+}
+
+SlackResponse WebClient::admin_users_remove(
+    team_id: str, user_id : str, ** kwargs
+) {
+    /*Remove a user from a workspace.
+
+    Args:
+        team_id (str): ID of the team. e.g. 'T1234'
+        user_id (str): The ID of the user to remove. e.g. 'W12345678'
+    */
+    kwargs.update({ "team_id": team_id, "user_id" : user_id })
+        return self.api_call("admin.users.remove", json = kwargs)
+}
+
+SlackResponse WebClient::admin_users_setAdmin(
+    team_id: str, user_id : str, ** kwargs
+) {
+    /*Set an existing guest, regular user, or owner to be an admin user.
+
+    Args:
+        team_id (str): ID of the team. e.g. 'T1234'
+        user_id (str): The ID of the user to remove. e.g. 'W12345678'
+    */
+    kwargs.update({ "team_id": team_id, "user_id" : user_id })
+        return self.api_call("admin.users.setAdmin", json = kwargs)
+}
+
+SlackResponse WebClient::admin_users_setOwner(
+    team_id: str, user_id : str, ** kwargs
+) {
+    /*Set an existing guest, regular user, or admin user to be a workspace owner.
+
+    Args:
+        team_id (str): ID of the team. e.g. 'T1234'
+        user_id (str): The ID of the user to remove. e.g. 'W12345678'
+    */
+    kwargs.update({ "team_id": team_id, "user_id" : user_id })
+        return self.api_call("admin.users.setOwner", json = kwargs)
+}
+
+SlackResponse WebClient::admin_users_setRegular(
+    team_id: str, user_id : str, ** kwargs
+) {
+    /*Set an existing guest user, admin user, or owner to be a regular user.
+
+    Args:
+        team_id (str): ID of the team. e.g. 'T1234'
+        user_id (str): The ID of the user to remove. e.g. 'W12345678'
+    */
+    kwargs.update({ "team_id": team_id, "user_id" : user_id })
+        return self.api_call("admin.users.setRegular", json = kwargs)
+}
+
+SlackResponse WebClient::api_test(Json::Value kwargs) {
+    /*Checks API calling code.*/
+    return self.api_call("api.test", json = kwargs)
+}
+
+SlackResponse WebClient::auth_revoke(Json::Value kwargs) {
+    /*Revokes a token.*/
+    return self.api_call("auth.revoke", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::auth_test(Json::Value kwargs) {
+    /*Checks authentication & identity.*/
+    return self.api_call("auth.test", json = kwargs)
+}
+
+SlackResponse WebClient::bots_info(Json::Value kwargs) {
+    /*Gets information about a bot user.*/
+    return self.api_call("bots.info", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::channels_archive(
+    channel: str, ** kwargs
+) {
+    /*Archives a channel.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+    */
+    kwargs.update({ "channel": channel })
+        return self.api_call("channels.archive", json = kwargs)
+}
+
+SlackResponse WebClient::channels_create(name: str, ** kwargs) {
+    /*Creates a channel.
+
+    Args:
+        name (str): The name of the channel. e.g. 'mychannel'
+    */
+    kwargs.update({ "name": name })
+        return self.api_call("channels.create", json = kwargs)
+}
+
+SlackResponse WebClient::channels_history(
+    channel: str, ** kwargs
+) {
+    /*Fetches history of messages and events from a channel.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+    */
+    kwargs.update({ "channel": channel })
+        return self.api_call("channels.history", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::channels_info(channel: str, ** kwargs) {
+    /*Gets information about a channel.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+    */
+    kwargs.update({ "channel": channel })
+        return self.api_call("channels.info", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::channels_invite(
+    channel: str, user : str, ** kwargs
+) {
+    /*Invites a user to a channel.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+        user (str): The user id. e.g. 'U1234567890'
+    */
+    kwargs.update({ "channel": channel, "user" : user })
+        return self.api_call("channels.invite", json = kwargs)
+}
+
+SlackResponse WebClient::channels_join(name: str, ** kwargs) {
+    /*Joins a channel, creating it if needed.
+
+    Args:
+        name (str): The channel name. e.g. '#general'
+    */
+    kwargs.update({ "name": name })
+        return self.api_call("channels.join", json = kwargs)
+}
+
+SlackResponse WebClient::channels_kick(
+    channel: str, user : str, ** kwargs
+) {
+    /*Removes a user from a channel.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+        user (str): The user id. e.g. 'U1234567890'
+    */
+    kwargs.update({ "channel": channel, "user" : user })
+        return self.api_call("channels.kick", json = kwargs)
+}
+
+SlackResponse WebClient::channels_leave(channel: str, ** kwargs) {
+    /*Leaves a channel.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+    */
+    kwargs.update({ "channel": channel })
+        return self.api_call("channels.leave", json = kwargs)
+}
+
+SlackResponse WebClient::channels_list(Json::Value kwargs) {
+    /*Lists all channels in a Slack team.*/
+    return self.api_call("channels.list", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::channels_mark(
+    channel: str, ts : str, ** kwargs
+) {
+    /*Sets the read cursor in a channel.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+        ts (str): Timestamp of the most recently seen message. e.g. '1234567890.123456'
+    */
+    kwargs.update({ "channel": channel, "ts" : ts })
+        return self.api_call("channels.mark", json = kwargs)
+}
+
+SlackResponse WebClient::channels_rename(
+    channel: str, name : str, ** kwargs
+) {
+    /*Renames a channel.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+        name (str): The new channel name. e.g. 'newchannel'
+    */
+    kwargs.update({ "channel": channel, "name" : name })
+        return self.api_call("channels.rename", json = kwargs)
+}
+
+SlackResponse WebClient::channels_replies(
+    channel: str, thread_ts : str, ** kwargs
+) {
+    /*Retrieve a thread of messages posted to a channel
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+        thread_ts (str): The timestamp of an existing message with 0 or more replies.
+            e.g. '1234567890.123456'
+    */
+    kwargs.update({ "channel": channel, "thread_ts" : thread_ts })
+        return self.api_call("channels.replies", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::channels_setPurpose(
+    channel: str, purpose : str, ** kwargs
+) {
+    /*Sets the purpose for a channel.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+        purpose (str): The new purpose for the channel. e.g. 'My Purpose'
+    */
+    kwargs.update({ "channel": channel, "purpose" : purpose })
+        return self.api_call("channels.setPurpose", json = kwargs)
+}
+
+SlackResponse WebClient::channels_setTopic(
+    channel: str, topic : str, ** kwargs
+) {
+    /*Sets the topic for a channel.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+        topic (str): The new topic for the channel. e.g. 'My Topic'
+    */
+    kwargs.update({ "channel": channel, "topic" : topic })
+        return self.api_call("channels.setTopic", json = kwargs)
+}
+
+SlackResponse WebClient::channels_unarchive(
+    channel: str, ** kwargs
+) {
+    /*Unarchives a channel.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+    */
+    kwargs.update({ "channel": channel })
+        return self.api_call("channels.unarchive", json = kwargs)
+}
+
+SlackResponse WebClient::chat_delete(
+    channel: str, ts : str, ** kwargs
+) {
+    /*Deletes a message.
+
+    Args:
+        channel (str): Channel containing the message to be deleted. e.g. 'C1234567890'
+        ts (str): Timestamp of the message to be deleted. e.g. '1234567890.123456'
+    */
+    kwargs.update({ "channel": channel, "ts" : ts })
+        return self.api_call("chat.delete", json = kwargs)
+}
+
+SlackResponse WebClient::chat_deleteScheduledMessage(
+    channel: str, scheduled_message_id : str, ** kwargs
+) {
+    /*Deletes a scheduled message.
+
+    Args:
+        channel (str): The channel the scheduled_message is posting to. e.g. 'C1234567890'
+        scheduled_message_id (str): scheduled_message_id returned from call to chat.scheduleMessage e.g. 'Q1234ABCD'
+}
+        */
+    kwargs.update(
+        { "channel": channel, "scheduled_message_id" : scheduled_message_id }
+    )
+        return self.api_call("chat.deleteScheduledMessage", json = kwargs)
+}
+
+SlackResponse WebClient::chat_getPermalink(
+    channel: str, message_ts : str, ** kwargs
+) {
+    /*Retrieve a permalink URL for a specific extant message
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+        message_ts (str): The timestamp. e.g. '1234567890.123456'
+    */
+    kwargs.update({ "channel": channel, "message_ts" : message_ts })
+        return self.api_call("chat.getPermalink", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::chat_meMessage(
+    channel: str, text : str, ** kwargs
+) {
+    /*Share a me message into a channel.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+        text (str): The message you'd like to share. e.g. 'Hello world'
+    */
+    kwargs.update({ "channel": channel, "text" : text })
+        return self.api_call("chat.meMessage", json = kwargs)
+}
+
+SlackResponse WebClient::chat_postEphemeral(
+    channel: str, user : str, ** kwargs
+) {
+    /*Sends an ephemeral message to a user in a channel.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+        user (str): The id of user who should see the message. e.g. 'U0BPQUNTA'
+        text (str): The message you'd like to share. e.g. 'Hello world'
+            text is not required when presenting blocks.
+        blocks (list): A dictionary list of blocks.
+            Blocks are required when not presenting text.
+            e.g. [{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]
+    */
+    kwargs.update({ "channel": channel, "user" : user })
+        return self.api_call("chat.postEphemeral", json = kwargs)
+}
+
+SlackResponse WebClient::chat_postMessage(
+    channel: str, ** kwargs
+) {
+    /*Sends a message to a channel.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+        text (str): The message you'd like to share. e.g. 'Hello world'
+            text is not required when presenting blocks.
+        blocks (list): A dictionary list of blocks.
+            Blocks are required when not presenting text.
+            e.g. [{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]
+    */
+    kwargs.update({ "channel": channel })
+        return self.api_call("chat.postMessage", json = kwargs)
+}
+
+SlackResponse WebClient::chat_scheduleMessage(
+    channel: str, post_at : str, text : str, ** kwargs
+) {
+    /*Schedules a message.
+
+    Args:
+        channel (str): The channel the scheduled_message is posting to. e.g. 'C1234567890'
+        post_at (str): Unix EPOCH timestamp of time in future to send the message. e.g. '299876400'
+        text (str): The message you'd like to send. e.g. 'Hello world'
+    */
+    kwargs.update({ "channel": channel, "post_at" : post_at, "text" : text })
+        return self.api_call("chat.scheduleMessage", json = kwargs)
+}
+
+SlackResponse WebClient::chat_unfurl(
+    channel: str, ts : str, unfurls : dict, ** kwargs
+) {
+    /*Provide custom unfurl behavior for user-posted URLs.
+
+    Args:
+        channel (str): The Channel ID of the message. e.g. 'C1234567890'
+        ts (str): Timestamp of the message to add unfurl behavior to. e.g. '1234567890.123456'
+        unfurls (dict): a dict of the specific URLs you're offering an unfurl for.
+            e.g. {"https://example.com/": {"text": "Every day is the test."}}
+    */
+    kwargs.update({ "channel": channel, "ts" : ts, "unfurls" : unfurls })
+        return self.api_call("chat.unfurl", json = kwargs)
+}
+
+SlackResponse WebClient::chat_update(
+    channel: str, ts : str, ** kwargs
+) {
+    /*Updates a message in a channel.
+
+    Args:
+        channel (str): The channel containing the message to be updated. e.g. 'C1234567890'
+        ts (str): Timestamp of the message to be updated. e.g. '1234567890.123456'
+        text (str): The message you'd like to share. e.g. 'Hello world'
+            text is not required when presenting blocks.
+        blocks (list): A dictionary list of blocks.
+            Blocks are required when not presenting text.
+            e.g. [{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]
+    */
+    kwargs.update({ "channel": channel, "ts" : ts })
+        return self.api_call("chat.update", json = kwargs)
+}
+
+SlackResponse WebClient::chat_scheduledMessages_list(Json::Value kwargs) {
+    /*Lists all scheduled messages.*/
+    return self.api_call("chat.scheduledMessages.list", json = kwargs)
+}
+
+SlackResponse WebClient::conversations_archive(
+    channel: str, ** kwargs
+) {
+    /*Archives a conversation.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+    */
+    kwargs.update({ "channel": channel })
+        return self.api_call("conversations.archive", json = kwargs)
+}
+
+SlackResponse WebClient::conversations_close(
+    channel: str, ** kwargs
+) {
+    /*Closes a direct message or multi-person direct message.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+    */
+    kwargs.update({ "channel": channel })
+        return self.api_call("conversations.close", json = kwargs)
+}
+
+SlackResponse WebClient::conversations_create(
+    name: str, ** kwargs
+) {
+    /*Initiates a public or private channel-based conversation
+
+    Args:
+        name (str): The name of the channel. e.g. 'mychannel'
+    */
+    kwargs.update({ "name": name })
+        return self.api_call("conversations.create", json = kwargs)
+}
+
+SlackResponse WebClient::conversations_history(
+    channel: str, ** kwargs
+) {
+    /*Fetches a conversation's history of messages and events.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+    */
+    kwargs.update({ "channel": channel })
+        return self.api_call("conversations.history", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::conversations_info(
+    channel: str, ** kwargs
+) {
+    /*Retrieve information about a conversation.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+    */
+    kwargs.update({ "channel": channel })
+        return self.api_call("conversations.info", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::conversations_invite(
+    channel: str, users : List[str], ** kwargs
+) {
+    /*Invites users to a channel.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+        users (list): An list of user id's to invite. e.g. ['U2345678901', 'U3456789012']
+    */
+    kwargs.update({ "channel": channel, "users" : users })
+        return self.api_call("conversations.invite", json = kwargs)
+}
+
+SlackResponse WebClient::conversations_join(
+    channel: str, ** kwargs
+) {
+    /*Joins an existing conversation.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+    */
+    kwargs.update({ "channel": channel })
+        return self.api_call("conversations.join", json = kwargs)
+}
+
+SlackResponse WebClient::conversations_kick(
+    channel: str, user : str, ** kwargs
+) {
+    /*Removes a user from a conversation.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+        user (str): The id of the user to kick. e.g. 'U2345678901'
+    */
+    kwargs.update({ "channel": channel, "user" : user })
+        return self.api_call("conversations.kick", json = kwargs)
+}
+
+SlackResponse WebClient::conversations_leave(
+    channel: str, ** kwargs
+) {
+    /*Leaves a conversation.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+    */
+    kwargs.update({ "channel": channel })
+        return self.api_call("conversations.leave", json = kwargs)
+}
+
+SlackResponse WebClient::conversations_list(Json::Value kwargs) {
+    /*Lists all channels in a Slack team.*/
+    return self.api_call("conversations.list", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::conversations_members(
+    channel: str, ** kwargs
+) {
+    /*Retrieve members of a conversation.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+    */
+    kwargs.update({ "channel": channel })
+        return self.api_call("conversations.members", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::conversations_open(Json::Value kwargs) {
+    /*Opens or resumes a direct message or multi-person direct message.*/
+    return self.api_call("conversations.open", json = kwargs)
+}
+
+SlackResponse WebClient::conversations_rename(
+    channel: str, name : str, ** kwargs
+) {
+    /*Renames a conversation.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+        name (str): The new channel name. e.g. 'newchannel'
+    */
+    kwargs.update({ "channel": channel, "name" : name })
+        return self.api_call("conversations.rename", json = kwargs)
+}
+
+SlackResponse WebClient::conversations_replies(
+    channel: str, ts : str, ** kwargs
+) {
+    /*Retrieve a thread of messages posted to a conversation
+
+    Args:
+        channel (str): Conversation ID to fetch thread from. e.g. 'C1234567890'
+        ts (str): Unique identifier of a thread's parent message. e.g. '1234567890.123456'
+    */
+    kwargs.update({ "channel": channel, "ts" : ts })
+        return self.api_call("conversations.replies", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::conversations_setPurpose(
+    channel: str, purpose : str, ** kwargs
+) {
+    /*Sets the purpose for a conversation.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+        purpose (str): The new purpose for the channel. e.g. 'My Purpose'
+    */
+    kwargs.update({ "channel": channel, "purpose" : purpose })
+        return self.api_call("conversations.setPurpose", json = kwargs)
+}
+
+SlackResponse WebClient::conversations_setTopic(
+    channel: str, topic : str, ** kwargs
+) {
+    /*Sets the topic for a conversation.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+        topic (str): The new topic for the channel. e.g. 'My Topic'
+    */
+    kwargs.update({ "channel": channel, "topic" : topic })
+        return self.api_call("conversations.setTopic", json = kwargs)
+}
+
+SlackResponse WebClient::conversations_unarchive(
+    channel: str, ** kwargs
+) {
+    /*Reverses conversation archival.
+
+    Args:
+        channel (str): The channel id. e.g. 'C1234567890'
+    */
+    kwargs.update({ "channel": channel })
+        return self.api_call("conversations.unarchive", json = kwargs)
+}
+
+SlackResponse WebClient::dialog_open(
+    dialog: dict, trigger_id : str, ** kwargs
+) {
+    /*Open a dialog with a user.
+
+    Args:
+        dialog (dict): A dictionary of dialog arguments.
+            {
+                "callback_id": "46eh782b0",
+                "title": "Request something",
+                "submit_label": "Request",
+                "state": "Max",
+                "elements": [
+                    {
+                        "type": "text",
+                        "label": "Origin",
+                        "name": "loc_origin"
+                    },
+                    {
+                        "type": "text",
+                        "label": "Destination",
+                        "name": "loc_destination"
+                    }
+                ]
+            }
+        trigger_id (str): The trigger id of a recent message interaction.
+            e.g. '12345.98765.abcd2358fdea'
+    */
+    kwargs.update({ "dialog": dialog, "trigger_id" : trigger_id })
+        return self.api_call("dialog.open", json = kwargs)
+}
+
+SlackResponse WebClient::dnd_endDnd(Json::Value kwargs) {
+    /*Ends the current user's Do Not Disturb session immediately.*/
+    return self.api_call("dnd.endDnd", json = kwargs)
+}
+
+SlackResponse WebClient::dnd_endSnooze(Json::Value kwargs) {
+    /*Ends the current user's snooze mode immediately.*/
+    return self.api_call("dnd.endSnooze", json = kwargs)
+}
+
+SlackResponse WebClient::dnd_info(Json::Value kwargs) {
+    /*Retrieves a user's current Do Not Disturb status.*/
+    return self.api_call("dnd.info", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::dnd_setSnooze(
+    num_minutes: int, ** kwargs
+) {
+    /*Turns on Do Not Disturb mode for the current user, or changes its duration.
+
+    Args:
+        num_minutes (int): The snooze duration. e.g. 60
+    */
+    kwargs.update({ "num_minutes": num_minutes })
+        return self.api_call("dnd.setSnooze", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::dnd_teamInfo(Json::Value kwargs) {
+    /*Retrieves the Do Not Disturb status for users on a team.*/
+    return self.api_call("dnd.teamInfo", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::emoji_list(Json::Value kwargs) {
+    /*Lists custom emoji for a team.*/
+    return self.api_call("emoji.list", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::files_comments_delete(
+    file: str, id : str, ** kwargs
+) {
+    /*Deletes an existing comment on a file.
+
+    Args:
+        file (str): The file id. e.g. 'F1234467890'
+        id (str): The file comment id. e.g. 'Fc1234567890'
+    */
+    kwargs.update({ "file": file, "id" : id })
+        return self.api_call("files.comments.delete", json = kwargs)
+}
+
+SlackResponse WebClient::files_delete(file: str, ** kwargs) {
+    /*Deletes a file.
+
+    Args:
+        file (str): The file id. e.g. 'F1234467890'
+    */
+    kwargs.update({ "file": file })
+        return self.api_call("files.delete", json = kwargs)
+}
+
+SlackResponse WebClient::files_info(file: str, ** kwargs) {
+    /*Gets information about a team file.
+
+    Args:
+        file (str): The file id. e.g. 'F1234467890'
+    */
+    kwargs.update({ "file": file })
+        return self.api_call("files.info", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::files_list(Json::Value kwargs) {
+    /*Lists & filters team files.*/
+    return self.api_call("files.list", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::files_remote_info(Json::Value kwargs) {
+    /*Retrieve information about a remote file added to Slack.*/
+    return self.api_call("files.remote.info", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::files_remote_list(Json::Value kwargs) {
+    /*Retrieve information about a remote file added to Slack.*/
+    return self.api_call("files.remote.list", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::files_remote_add(
+    external_id: str, external_url : str, title : str, ** kwargs
+) {
+    /*Adds a file from a remote service.
+
+    Args:
+        external_id (str): Creator defined GUID for the file. e.g. '123456'
+        external_url (str): URL of the remote file. e.g. 'http://example.com/my_cloud_service_file/abc123'
+        title (str): Title of the file being shared. e.g. 'Danger, High Voltage!'
+    */
+    kwargs.update(
+        { "external_id": external_id, "external_url" : external_url, "title" : title }
+    )
+        return self.api_call("files.remote.add", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::files_remote_update(Json::Value kwargs) {
+    /*Updates an existing remote file.*/
+    return self.api_call("files.remote.update", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::files_remote_remove(Json::Value kwargs) {
+    /*Remove a remote file.*/
+    return self.api_call("files.remote.remove", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::files_remote_share(
+    channels: Union[str, List[str]], ** kwargs
+) {
+    /*Share a remote file into a channel.
+
+    Args:
+        channels (list): Comma-separated list of channel IDs where the file will be shared.
+            e.g. ['C1234567890', 'C2345678901']
+    */
+    kwargs.update({ "channels": channels })
+        return self.api_call("files.remote.share", http_verb = "GET", params = kwargs)
+}
+
+SlackResponse WebClient::files_revokePublicURL(
+    file: str, ** kwargs
+) {
+    /*Revokes public/external sharing access for a file
+
+    Args:
+        file (str): The file id. e.g. 'F1234467890'
+    */
+    kwargs.update({ "file": file })
+        return self.api_call("files.revokePublicURL", json = kwargs)
+}
+
+SlackResponse WebClient::files_sharedPublicURL(
+    file: str, ** kwargs
+) {
+    /*Enables a file for public/external sharing.
+
+    Args:
+        file (str): The file id. e.g. 'F1234467890'
+    */
+    kwargs.update({ "file": file })
+        return self.api_call("files.sharedPublicURL", json = kwargs)
+}
+
+SlackResponse WebClient::files_upload(
+    file: Union[str, IOBase] = None, content : str = None, ** kwargs
+) {
+    /*Uploads or creates a file.
+
+    Args:
+        file (str): Supply a file path.
+            when you'd like to upload a specific file. e.g. 'dramacat.gif'
+        content (str): Supply content when you'd like to create an
+            editable text file containing the specified text. e.g. 'launch plan'
+    Raises:
+        SlackRequestError: If niether or both the `file` and `content` args are specified.
+    */
+    if file is Noneand content is None :
+    raise e.SlackRequestError("The file or content argument must be specified.")
+        if file is not None and content is not None :
+            raise e.SlackRequestError(
+                "You cannot specify both the file and the content argument."
+            )
+
+            if file :
+                return self.api_call("files.upload", files = { "file": file }, data = kwargs)
+}
+data = kwargs.copy()
+data.update({ "content": content })
+return self.api_call("files.upload", data = data)
+    }
+
+    SlackResponse WebClient::groups_archive(channel: str, ** kwargs) {
+        /*Archives a private channel.
+
+        Args:
+            channel (str): The channel id. e.g. 'C1234567890'
+        */
+        kwargs.update({ "channel": channel })
+            return self.api_call("groups.archive", json = kwargs)
+    }
+
+    SlackResponse WebClient::groups_create(name: str, ** kwargs) {
+        /*Creates a private channel.
+
+        Args:
+            name (str): The name of the private group. e.g. 'mychannel'
+        */
+        kwargs.update({ "name": name })
+            return self.api_call("groups.create", json = kwargs)
+    }
+
+    SlackResponse WebClient::groups_createChild(
+        channel: str, ** kwargs
+    ) {
+        /*Clones and archives a private channel.
+
+        Args:
+            channel (str): The group id. e.g. 'G1234567890'
+        */
+        kwargs.update({ "channel": channel })
+            return self.api_call("groups.createChild", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::groups_history(channel: str, ** kwargs) {
+        /*Fetches history of messages and events from a private channel.
+
+        Args:
+            channel (str): The group id. e.g. 'G1234567890'
+        */
+        kwargs.update({ "channel": channel })
+            return self.api_call("groups.history", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::groups_info(channel: str, ** kwargs) {
+        /*Gets information about a private channel.
+
+        Args:
+            channel (str): The group id. e.g. 'G1234567890'
+        */
+        kwargs.update({ "channel": channel })
+            return self.api_call("groups.info", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::groups_invite(
+        channel: str, user : str, ** kwargs
+    ) {
+        /*Invites a user to a private channel.
+
+        Args:
+            channel (str): The group id. e.g. 'G1234567890'
+            user (str): The user id. e.g. 'U1234567890'
+        */
+        kwargs.update({ "channel": channel, "user" : user })
+            return self.api_call("groups.invite", json = kwargs)
+    }
+
+    SlackResponse WebClient::groups_kick(
+        channel: str, user : str, ** kwargs
+    ) {
+        /*Removes a user from a private channel.
+
+        Args:
+            channel (str): The group id. e.g. 'G1234567890'
+            user (str): The user id. e.g. 'U1234567890'
+        */
+        kwargs.update({ "channel": channel, "user" : user })
+            return self.api_call("groups.kick", json = kwargs)
+    }
+
+    SlackResponse WebClient::groups_leave(channel: str, ** kwargs) {
+        /*Leaves a private channel.
+
+        Args:
+            channel (str): The group id. e.g. 'G1234567890'
+        */
+        kwargs.update({ "channel": channel })
+            return self.api_call("groups.leave", json = kwargs)
+    }
+
+    SlackResponse WebClient::groups_list(Json::Value kwargs) {
+        /*Lists private channels that the calling user has access to.*/
+        return self.api_call("groups.list", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::groups_mark(
+        channel: str, ts : str, ** kwargs
+    ) {
+        /*Sets the read cursor in a private channel.
+
+        Args:
+            channel (str): Private channel to set reading cursor in. e.g. 'C1234567890'
+            ts (str): Timestamp of the most recently seen message. e.g. '1234567890.123456'
+        */
+        kwargs.update({ "channel": channel, "ts" : ts })
+            return self.api_call("groups.mark", json = kwargs)
+    }
+
+    SlackResponse WebClient::groups_open(channel: str, ** kwargs) {
+        /*Opens a private channel.
+
+        Args:
+            channel (str): The channel id. e.g. 'C1234567890'
+        */
+        kwargs.update({ "channel": channel })
+            return self.api_call("groups.open", json = kwargs)
+    }
+
+    SlackResponse WebClient::groups_rename(
+        channel: str, name : str, ** kwargs
+    ) {
+        /*Renames a private channel.
+
+        Args:
+            channel (str): The channel id. e.g. 'C1234567890'
+            name (str): The new channel name. e.g. 'newchannel'
+        */
+        kwargs.update({ "channel": channel, "name" : name })
+            return self.api_call("groups.rename", json = kwargs)
+    }
+
+    SlackResponse WebClient::groups_replies(
+        channel: str, thread_ts : str, ** kwargs
+    ) {
+        /*Retrieve a thread of messages posted to a private channel
+
+        Args:
+            channel (str): The channel id. e.g. 'C1234567890'
+            thread_ts (str): The timestamp of an existing message with 0 or more replies.
+                e.g. '1234567890.123456'
+        */
+        kwargs.update({ "channel": channel, "thread_ts" : thread_ts })
+            return self.api_call("groups.replies", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::groups_setPurpose(
+        channel: str, purpose : str, ** kwargs
+    ) {
+        /*Sets the purpose for a private channel.
+
+        Args:
+            channel (str): The channel id. e.g. 'G1234567890'
+            purpose (str): The new purpose for the channel. e.g. 'My Purpose'
+        */
+        kwargs.update({ "channel": channel, "purpose" : purpose })
+            return self.api_call("groups.setPurpose", json = kwargs)
+    }
+
+    SlackResponse WebClient::groups_setTopic(
+        channel: str, topic : str, ** kwargs
+    ) {
+        /*Sets the topic for a private channel.
+
+        Args:
+            channel (str): The channel id. e.g. 'G1234567890'
+            topic (str): The new topic for the channel. e.g. 'My Topic'
+        */
+        kwargs.update({ "channel": channel, "topic" : topic })
+            return self.api_call("groups.setTopic", json = kwargs)
+    }
+
+    SlackResponse WebClient::groups_unarchive(
+        channel: str, ** kwargs
+    ) {
+        /*Unarchives a private channel.
+
+        Args:
+            channel (str): The channel id. e.g. 'G1234567890'
+        */
+        kwargs.update({ "channel": channel })
+            return self.api_call("groups.unarchive", json = kwargs)
+    }
+
+    SlackResponse WebClient::im_close(channel: str, ** kwargs) {
+        /*Close a direct message channel.
+
+        Args:
+            channel (str): Direct message channel to close. e.g. 'D1234567890'
+        */
+        kwargs.update({ "channel": channel })
+            return self.api_call("im.close", json = kwargs)
+    }
+
+    SlackResponse WebClient::im_history(channel: str, ** kwargs) {
+        /*Fetches history of messages and events from direct message channel.
+
+        Args:
+            channel (str): Direct message channel to fetch history from. e.g. 'D1234567890'
+        */
+        kwargs.update({ "channel": channel })
+            return self.api_call("im.history", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::im_list(Json::Value kwargs) {
+        /*Lists direct message channels for the calling user.*/
+        return self.api_call("im.list", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::im_mark(
+        channel: str, ts : str, ** kwargs
+    ) {
+        /*Sets the read cursor in a direct message channel.
+
+        Args:
+            channel (str): Direct message channel to set reading cursor in. e.g. 'D1234567890'
+            ts (str): Timestamp of the most recently seen message. e.g. '1234567890.123456'
+        */
+        kwargs.update({ "channel": channel, "ts" : ts })
+            return self.api_call("im.mark", json = kwargs)
+    }
+
+    SlackResponse WebClient::im_open(user: str, ** kwargs) {
+        /*Opens a direct message channel.
+
+        Args:
+            user (str): The user id to open a DM with. e.g. 'W1234567890'
+        */
+        kwargs.update({ "user": user })
+            return self.api_call("im.open", json = kwargs)
+    }
+
+    SlackResponse WebClient::im_replies(
+        channel: str, thread_ts : str, ** kwargs
+    ) {
+        /*Retrieve a thread of messages posted to a direct message conversation
+
+        Args:
+            channel (str): Direct message channel to fetch thread from. e.g. 'C1234567890'
+            thread_ts (str): The timestamp of an existing message with 0 or more replies.
+                e.g. '1234567890.123456'
+        */
+        kwargs.update({ "channel": channel, "thread_ts" : thread_ts })
+            return self.api_call("im.replies", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::migration_exchange(
+        users: List[str], ** kwargs
+    ) {
+        /*For Enterprise Grid workspaces, map local user IDs to global user IDs
+
+        Args:
+            users (list): A list of user ids, up to 400 per request.
+                e.g. ['W1234567890', 'U2345678901', 'U3456789012']
+        */
+        kwargs.update({ "users": users })
+            return self.api_call("migration.exchange", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::mpim_close(channel: str, ** kwargs) {
+        /*Closes a multiparty direct message channel.
+
+        Args:
+            channel (str): Multiparty Direct message channel to close. e.g. 'G1234567890'
+        */
+        kwargs.update({ "channel": channel })
+            return self.api_call("mpim.close", json = kwargs)
+    }
+
+    SlackResponse WebClient::mpim_history(channel: str, ** kwargs) {
+        /*Fetches history of messages and events from a multiparty direct message.
+
+        Args:
+            channel (str): Multiparty direct message to fetch history for. e.g. 'G1234567890'
+        */
+        kwargs.update({ "channel": channel })
+            return self.api_call("mpim.history", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::mpim_list(Json::Value kwargs) {
+        /*Lists multiparty direct message channels for the calling user.*/
+        return self.api_call("mpim.list", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::mpim_mark(
+        channel: str, ts : str, ** kwargs
+    ) {
+        /*Sets the read cursor in a multiparty direct message channel.
+
+        Args:
+            channel (str): Multiparty direct message channel to set reading cursor in.
+                e.g. 'G1234567890'
+            ts (str): Timestamp of the most recently seen message.
+                e.g. '1234567890.123456'
+        */
+        kwargs.update({ "channel": channel, "ts" : ts })
+            return self.api_call("mpim.mark", json = kwargs)
+    }
+
+    SlackResponse WebClient::mpim_open(users: List[str], ** kwargs) {
+        /*This method opens a multiparty direct message.
+
+        Args:
+            users (list): A lists of user ids. The ordering of the users
+                is preserved whenever a MPIM group is returned.
+}
+                e.g. ['W1234567890', 'U2345678901', 'U3456789012']
+        */
+        kwargs.update({ "users": users })
+            return self.api_call("mpim.open", json = kwargs)
+    }
+
+    SlackResponse WebClient::mpim_replies(
+        channel: str, thread_ts : str, ** kwargs
+    ) {
+        /*Retrieve a thread of messages posted to a direct message conversation from a
+        multiparty direct message.
+
+        Args:
+            channel (str): Multiparty direct message channel to fetch thread from.
+                e.g. 'G1234567890'
+            thread_ts (str): Unique identifier of a thread's parent message.
+                e.g. '1234567890.123456'
+        */
+        kwargs.update({ "channel": channel, "thread_ts" : thread_ts })
+            return self.api_call("mpim.replies", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::oauth_v2_access(
+        client_id: str, client_secret : str, code : str, ** kwargs
+    ) {
+        /*Exchanges a temporary OAuth verifier code for an access token.
+
+        Args:
+            client_id (str): Issued when you created your application. e.g. '4b39e9-752c4'
+            client_secret (str): Issued when you created your application. e.g. '33fea0113f5b1'
+            code (str): The code param returned via the OAuth callback. e.g. 'ccdaa72ad'
+}
+        */
+        kwargs.update({ "code": code })
+            return self.api_call(
+    }
+    "oauth.v2.access",
+        data = kwargs,
+        auth = { "client_id": client_id, "client_secret" : client_secret },
+        )
+
+            SlackResponse WebClient::oauth_access(
+                client_id: str, client_secret : str, code : str, ** kwargs
+            ) {
+        /*Exchanges a temporary OAuth verifier code for an access token.
+
+        Args:
+            client_id (str): Issued when you created your application. e.g. '4b39e9-752c4'
+            client_secret (str): Issued when you created your application. e.g. '33fea0113f5b1'
+            code (str): The code param returned via the OAuth callback. e.g. 'ccdaa72ad'
+}
+        */
+        kwargs.update({ "code": code })
+            return self.api_call(
+    }
+    "oauth.access",
+        data = kwargs,
+        auth = { "client_id": client_id, "client_secret" : client_secret },
+        )
+
+            SlackResponse WebClient::pins_add(channel: str, ** kwargs) {
+        /*Pins an item to a channel.
+
+        Args:
+            channel (str): Channel to pin the item in. e.g. 'C1234567890'
+            file (str): File id to pin. e.g. 'F1234567890'
+            file_comment (str): File comment to pin. e.g. 'Fc1234567890'
+            timestamp (str): Timestamp of message to pin. e.g. '1234567890.123456'
+        */
+        kwargs.update({ "channel": channel })
+            return self.api_call("pins.add", json = kwargs)
+    }
+
+    SlackResponse WebClient::pins_list(channel: str, ** kwargs) {
+        /*Lists items pinned to a channel.
+
+        Args:
+            channel (str): Channel to get pinned items for. e.g. 'C1234567890'
+        */
+        kwargs.update({ "channel": channel })
+            return self.api_call("pins.list", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::pins_remove(channel: str, ** kwargs) {
+        /*Un-pins an item from a channel.
+
+        Args:
+            channel (str): Channel to pin the item in. e.g. 'C1234567890'
+            file (str): File id to pin. e.g. 'F1234567890'
+            file_comment (str): File comment to pin. e.g. 'Fc1234567890'
+            timestamp (str): Timestamp of message to pin. e.g. '1234567890.123456'
+        */
+        kwargs.update({ "channel": channel })
+            return self.api_call("pins.remove", json = kwargs)
+    }
+
+    SlackResponse WebClient::reactions_add(name: str, ** kwargs) {
+        /*Adds a reaction to an item.
+
+        Args:
+            name (str): Reaction (emoji) name. e.g. 'thumbsup'
+            channel (str): Channel where the message to add reaction to was posted.
+                e.g. 'C1234567890'
+            timestamp (str): Timestamp of the message to add reaction to. e.g. '1234567890.123456'
+        */
+        kwargs.update({ "name": name })
+            return self.api_call("reactions.add", json = kwargs)
+    }
+
+    SlackResponse WebClient::reactions_get(Json::Value kwargs) {
+        /*Gets reactions for an item.*/
+        return self.api_call("reactions.get", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::reactions_list(Json::Value kwargs) {
+        /*Lists reactions made by a user.*/
+        return self.api_call("reactions.list", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::reactions_remove(name: str, ** kwargs) {
+        /*Removes a reaction from an item.
+
+        Args:
+            name (str): Reaction (emoji) name. e.g. 'thumbsup'
+        */
+        kwargs.update({ "name": name })
+            return self.api_call("reactions.remove", json = kwargs)
+    }
+
+    SlackResponse WebClient::reminders_add(
+        text: str, time : str, ** kwargs
+    ) {
+        /*Creates a reminder.
+
+        Args:
+            text (str): The content of the reminder. e.g. 'eat a banana'
+            time (str): When this reminder should happen:
+                the Unix timestamp (up to five years from now e.g. '1602288000'),
+                the number of seconds until the reminder (if within 24 hours),
+                or a natural language description (Ex. 'in 15 minutes' or 'every Thursday')
+        */
+        kwargs.update({ "text": text, "time" : time })
+            return self.api_call("reminders.add", json = kwargs)
+    }
+
+    SlackResponse WebClient::reminders_complete(
+        reminder: str, ** kwargs
+    ) {
+        /*Marks a reminder as complete.
+
+        Args:
+            reminder (str): The ID of the reminder to be marked as complete.
+                e.g. 'Rm12345678'
+        */
+        kwargs.update({ "reminder": reminder })
+            return self.api_call("reminders.complete", json = kwargs)
+    }
+
+    SlackResponse WebClient::reminders_delete(
+        reminder: str, ** kwargs
+    ) {
+        /*Deletes a reminder.
+
+        Args:
+            reminder (str): The ID of the reminder. e.g. 'Rm12345678'
+        */
+        kwargs.update({ "reminder": reminder })
+            return self.api_call("reminders.delete", json = kwargs)
+    }
+
+    SlackResponse WebClient::reminders_info(
+        reminder: str, ** kwargs
+    ) {
+        /*Gets information about a reminder.
+
+        Args:
+            reminder (str): The ID of the reminder. e.g. 'Rm12345678'
+        */
+        kwargs.update({ "reminder": reminder })
+            return self.api_call("reminders.info", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::reminders_list(Json::Value kwargs) {
+        /*Lists all reminders created by or for a given user.*/
+        return self.api_call("reminders.list", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::rtm_connect(Json::Value kwargs) {
+        /*Starts a Real Time Messaging session.*/
+        return self.api_call("rtm.connect", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::rtm_start(Json::Value kwargs) {
+        /*Starts a Real Time Messaging session.*/
+        return self.api_call("rtm.start", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::search_all(query: str, ** kwargs) {
+        /*Searches for messages and files matching a query.
+
+        Args:
+            query (str): Search query. May contains booleans, etc.
+                e.g. 'pickleface'
+        */
+        kwargs.update({ "query": query })
+            return self.api_call("search.all", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::search_files(query: str, ** kwargs) {
+        /*Searches for files matching a query.
+
+        Args:
+            query (str): Search query. May contains booleans, etc.
+                e.g. 'pickleface'
+        */
+        kwargs.update({ "query": query })
+            return self.api_call("search.files", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::search_messages(query: str, ** kwargs) {
+        /*Searches for messages matching a query.
+
+        Args:
+            query (str): Search query. May contains booleans, etc.
+                e.g. 'pickleface'
+        */
+        kwargs.update({ "query": query })
+            return self.api_call("search.messages", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::stars_add(Json::Value kwargs) {
+        /*Adds a star to an item.
+
+        Args:
+            channel (str): Channel to add star to, or channel where the message to add
+                star to was posted (used with timestamp). e.g. 'C1234567890'
+            file (str): File to add star to. e.g. 'F1234567890'
+            file_comment (str): File comment to add star to. e.g. 'Fc1234567890'
+            timestamp (str): Timestamp of the message to add star to. e.g. '1234567890.123456'
+        */
+        return self.api_call("stars.add", json = kwargs)
+    }
+
+    SlackResponse WebClient::stars_list(Json::Value kwargs) {
+        /*Lists stars for a user.*/
+        return self.api_call("stars.list", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::stars_remove(Json::Value kwargs) {
+        /*Removes a star from an item.
+
+        Args:
+            channel (str): Channel to remove star from, or channel where
+                the message to remove star from was posted (used with timestamp). e.g. 'C1234567890'
+            file (str): File to remove star from. e.g. 'F1234567890'
+            file_comment (str): File comment to remove star from. e.g. 'Fc1234567890'
+            timestamp (str): Timestamp of the message to remove star from. e.g. '1234567890.123456'
+        */
+        return self.api_call("stars.remove", json = kwargs)
+    }
+
+    SlackResponse WebClient::team_accessLogs(Json::Value kwargs) {
+        /*Gets the access logs for the current team.*/
+        return self.api_call("team.accessLogs", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::team_billableInfo(Json::Value kwargs) {
+        /*Gets billable users information for the current team.*/
+        return self.api_call("team.billableInfo", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::team_info(Json::Value kwargs) {
+        /*Gets information about the current team.*/
+        return self.api_call("team.info", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::team_integrationLogs(Json::Value kwargs) {
+        /*Gets the integration logs for the current team.*/
+        return self.api_call("team.integrationLogs", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::team_profile_get(Json::Value kwargs) {
+        /*Retrieve a team's profile.*/
+        return self.api_call("team.profile.get", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::usergroups_create(name: str, ** kwargs) {
+        /*Create a User Group
+
+        Args:
+            name (str): A name for the User Group. Must be unique among User Groups.
+                e.g. 'My Test Team'
+        */
+        kwargs.update({ "name": name })
+            return self.api_call("usergroups.create", json = kwargs)
+    }
+
+    SlackResponse WebClient::usergroups_disable(
+        usergroup: str, ** kwargs
+    ) {
+        /*Disable an existing User Group
+
+        Args:
+            usergroup (str): The encoded ID of the User Group to disable.
+                e.g. 'S0604QSJC'
+        */
+        kwargs.update({ "usergroup": usergroup })
+            return self.api_call("usergroups.disable", json = kwargs)
+    }
+
+    SlackResponse WebClient::usergroups_enable(
+        usergroup: str, ** kwargs
+    ) {
+        /*Enable a User Group
+
+        Args:
+            usergroup (str): The encoded ID of the User Group to enable.
+                e.g. 'S0604QSJC'
+        */
+        kwargs.update({ "usergroup": usergroup })
+            return self.api_call("usergroups.enable", json = kwargs)
+    }
+
+    SlackResponse WebClient::usergroups_list(Json::Value kwargs) {
+        /*List all User Groups for a team*/
+        return self.api_call("usergroups.list", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::usergroups_update(
+        usergroup: str, ** kwargs
+    ) {
+        /*Update an existing User Group
+
+        Args:
+            usergroup (str): The encoded ID of the User Group to update.
+                e.g. 'S0604QSJC'
+        */
+        kwargs.update({ "usergroup": usergroup })
+            return self.api_call("usergroups.update", json = kwargs)
+    }
+
+    SlackResponse WebClient::usergroups_users_list(
+        usergroup: str, ** kwargs
+    ) {
+        /*List all users in a User Group
+
+        Args:
+            usergroup (str): The encoded ID of the User Group to update.
+                e.g. 'S0604QSJC'
+        */
+        kwargs.update({ "usergroup": usergroup })
+            return self.api_call("usergroups.users.list", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::usergroups_users_update(
+        usergroup: str, users : List[str], ** kwargs
+    ) {
+        /*Update the list of users for a User Group
+
+        Args:
+            usergroup (str): The encoded ID of the User Group to update.
+                e.g. 'S0604QSJC'
+            users (list): A list user IDs that represent the entire list of
+                users for the User Group. e.g. ['U060R4BJ4', 'U060RNRCZ']
+        */
+        kwargs.update({ "usergroup": usergroup, "users" : users })
+            return self.api_call("usergroups.users.update", json = kwargs)
+    }
+
+    SlackResponse WebClient::users_conversations(Json::Value kwargs) {
+        /*List conversations the calling user may access.*/
+        return self.api_call("users.conversations", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::users_deletePhoto(Json::Value kwargs) {
+        /*Delete the user profile photo*/
+        return self.api_call("users.deletePhoto", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::users_getPresence(user: str, ** kwargs) {
+        /*Gets user presence information.
+
+        Args:
+            user (str): User to get presence info on. Defaults to the authed user.
+                e.g. 'W1234567890'
+        */
+        kwargs.update({ "user": user })
+            return self.api_call("users.getPresence", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::users_identity(Json::Value kwargs) {
+        /*Get a user's identity.*/
+        return self.api_call("users.identity", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::users_info(user: str, ** kwargs) {
+        /*Gets information about a user.
+
+        Args:
+            user (str): User to get info on.
+                e.g. 'W1234567890'
+        */
+        kwargs.update({ "user": user })
+            return self.api_call("users.info", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::users_list(Json::Value kwargs) {
+        /*Lists all users in a Slack team.*/
+        return self.api_call("users.list", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::users_lookupByEmail(
+        email: str, ** kwargs
+    ) {
+        /*Find a user with an email address.
+
+        Args:
+            email (str): An email address belonging to a user in the workspace.
+                e.g. 'spengler@ghostbusters.example.com'
+        */
+        kwargs.update({ "email": email })
+            return self.api_call("users.lookupByEmail", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::users_setPhoto(
+        image: Union[str, IOBase], ** kwargs
+    ) {
+        /*Set the user profile photo
+
+        Args:
+            image (str): Supply the path of the image you'd like to upload.
+                e.g. 'myimage.png'
+        */
+        return self.api_call("users.setPhoto", files = { "image": image }, data = kwargs)
+    }
+
+    SlackResponse WebClient::users_setPresence(
+        presence: str, ** kwargs
+    ) {
+        /*Manually sets user presence.
+
+        Args:
+            presence (str): Either 'auto' or 'away'.
+        */
+        kwargs.update({ "presence": presence })
+            return self.api_call("users.setPresence", json = kwargs)
+    }
+
+    SlackResponse WebClient::users_profile_get(Json::Value kwargs) {
+        /*Retrieves a user's profile information.*/
+        return self.api_call("users.profile.get", http_verb = "GET", params = kwargs)
+    }
+
+    SlackResponse WebClient::users_profile_set(Json::Value kwargs) {
+        /*Set the profile information for a user.*/
+        return self.api_call("users.profile.set", json = kwargs)
+    }
+
+    SlackResponse WebClient::views_open(
+        trigger_id: str, view : dict, ** kwargs
+    ) {
+        /*Open a view for a user.​
+
+        Open a modal with a user by exchanging a trigger_id received
+        from another interaction.
+​
+        See the modals (https://api.slack.com/block-kit/surfaces/modals)
+        documentation to learn how to obtain triggers from interactive components.
+
+        Args:
+            trigger_id (str): Exchange a trigger to post to the user.
+                e.g. '12345.98765.abcd2358fdea'
+            view (dict): The view payload.
+        */
+        kwargs.update({ "trigger_id": trigger_id, "view" : view })
+            return self.api_call("views.open", json = kwargs)
+    }
+
+    SlackResponse WebClient::views_push(
+        trigger_id: str, view : dict, ** kwargs
+    ) {
+        /*Push a view onto the stack of a root view.
+
+        Push a new view onto the existing view stack by passing a view
+        payload and a valid trigger_id generated from an interaction
+        within the existing modal.
+
+        Read the modals documentation (https://api.slack.com/block-kit/surfaces/modals)
+        to learn more about the lifecycle and intricacies of views.
+
+        Args:
+            trigger_id (str): Exchange a trigger to post to the user.
+                e.g. '12345.98765.abcd2358fdea'
+            view (dict): The view payload.
+        */
+        kwargs.update({ "trigger_id": trigger_id, "view" : view })
+            return self.api_call("views.push", json = kwargs)
+    }
+
+    SlackResponse WebClient::views_update(
+        view: dict, external_id : str = None, view_id : str = None, ** kwargs
+    ) {
+        /*Update an existing view.
+
+        Update a view by passing a new view definition along with the
+        view_id returned in views.open or the external_id.
+}
+
+        See the modals documentation (https://api.slack.com/block-kit/surfaces/modals#updating_views)
+        to learn more about updating views and avoiding race conditions with the hash argument.
+
+        Args:
+            view (dict): The view payload.
+            external_id (str): A unique identifier of the view set by the developer.
+                e.g. 'bmarley_view2'
+            view_id (str): A unique identifier of the view to be updated.
+                e.g. 'VMM512F2U'
+        Raises:
+            SlackRequestError: Either view_id or external_id is required.
+        */
+        kwargs.update({ "view": view })
+            if external_id:
+        kwargs.update({ "external_id": external_id })
+            elif view_id :
+        kwargs.update({ "view_id": view_id })
+            else:
+        raise e.SlackRequestError("Either view_id or external_id is required.")
+
+            return self.api_call("views.update", json = kwargs)
+    }
+
+    SlackResponse WebClient::views_publish(
+        user_id: str, view : dict, ** kwargs
+    ) {
+        /*Publish a static view for a User.
+        Create or update the view that comprises an
+        app's Home tab (https://api.slack.com/surfaces/tabs)
+        for a specific user.
+        Args:
+            user_id (str): id of the user you want publish a view to.
+                e.g. 'U0BPQUNTA'
+            view (dict): The view payload.
+        */
+        kwargs.update({ "user_id": user_id, "view" : view })
+            return self.api_call("views.publish", json = kwargs)
+    }
+    };

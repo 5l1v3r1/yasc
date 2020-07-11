@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\slack">
+      <UniqueIdentifier>{24a519d7-fd2f-4910-94c4-a33ea127b221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\slack">
+      <UniqueIdentifier>{8025feba-0066-4c1d-8038-271afd14e8fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\slack\web">
+      <UniqueIdentifier>{0271996b-0345-40c1-a1ea-6e3ec61d46dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\slack\web">
+      <UniqueIdentifier>{88f4a1c3-83af-4435-b4b2-4846ed891e76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\lwhp">
+      <UniqueIdentifier>{181cb134-3c99-4e94-863e-e4df91a6242e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\lwhp">
+      <UniqueIdentifier>{b112b801-2843-4bf3-ac31-c7c57776ec15}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="slack\web\base_client.cpp">
+      <Filter>Source Files\slack\web</Filter>
+    </ClCompile>
+    <ClCompile Include="slack\web\slack_response.cpp">
+      <Filter>Source Files\slack\web</Filter>
+    </ClCompile>
+    <ClCompile Include="slack\slackapi.cpp">
+      <Filter>Source Files\slack</Filter>
+    </ClCompile>
+    <ClCompile Include="slack\slackerrors.cpp">
+      <Filter>Source Files\slack</Filter>
+    </ClCompile>
+    <ClCompile Include="slack\web\client.cpp">
+      <Filter>Source Files\slack\web</Filter>
+    </ClCompile>
+    <ClCompile Include="rat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="utility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lwhp\WinHttpRequest.cpp">
+      <Filter>Source Files\lwhp</Filter>
+    </ClCompile>
+    <ClCompile Include="lwhp\WinHttpResponse.cpp">
+      <Filter>Source Files\lwhp</Filter>
+    </ClCompile>
+    <ClCompile Include="lwhp\ClientSession.cpp">
+      <Filter>Source Files\lwhp</Filter>
+    </ClCompile>
+    <ClCompile Include="lwhp\NameValueCollection.cpp">
+      <Filter>Source Files\lwhp</Filter>
+    </ClCompile>
+    <ClCompile Include="lwhp\URI.cpp">
+      <Filter>Source Files\lwhp</Filter>
+    </ClCompile>
+    <ClCompile Include="lwhp\String.cpp">
+      <Filter>Source Files\lwhp</Filter>
+    </ClCompile>
+    <ClCompile Include="lwhp\Path.cpp">
+      <Filter>Source Files\lwhp</Filter>
+    </ClCompile>
+    <ClCompile Include="lwhp\Environment.cpp">
+      <Filter>Source Files\lwhp</Filter>
+    </ClCompile>
+    <ClCompile Include="lwhp\Token.cpp">
+      <Filter>Source Files\lwhp</Filter>
+    </ClCompile>
+    <ClCompile Include="lwhp\Ascii.cpp">
+      <Filter>Source Files\lwhp</Filter>
+    </ClCompile>
+    <ClCompile Include="lwhp\StringTokenizer.cpp">
+      <Filter>Source Files\lwhp</Filter>
+    </ClCompile>
+    <ClCompile Include="lwhp\File.cpp">
+      <Filter>Source Files\lwhp</Filter>
+    </ClCompile>
+    <ClCompile Include="lwhp\DirectoryIterator.cpp">
+      <Filter>Source Files\lwhp</Filter>
+    </ClCompile>
+    <ClCompile Include="lwhp\Timestamp.cpp">
+      <Filter>Source Files\lwhp</Filter>
+    </ClCompile>
+    <ClCompile Include="lwhp\Exception.cpp">
+      <Filter>Source Files\lwhp</Filter>
+    </ClCompile>
+    <ClCompile Include="commands.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="srdi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="slack\web\base_client.h">
+      <Filter>Header Files\slack\web</Filter>
+    </ClInclude>
+    <ClInclude Include="slack\slackapi.h">
+      <Filter>Header Files\slack</Filter>
+    </ClInclude>
+    <ClInclude Include="slack\slackerrors.h">
+      <Filter>Header Files\slack</Filter>
+    </ClInclude>
+    <ClInclude Include="slack\web\slack_response.h">
+      <Filter>Header Files\slack\web</Filter>
+    </ClInclude>
+    <ClInclude Include="slack\web\client.h">
+      <Filter>Header Files\slack\web</Filter>
+    </ClInclude>
+    <ClInclude Include="utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\WinHttpRequest.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\WinHttpResponse.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\ClientSession.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\libwinhttp.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\NameValueCollection.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\Exceptions.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\URI.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\String.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\Path.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\BugCheck.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\BufferAllocator.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\Buffer.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\Environment.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\Types.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\Environment_WIN32U.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\Token.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\Ascii.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\StringTokenizer.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\File.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\File_WIN32U.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\DirectoryIterator_WIN32U.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\DirectoryIterator.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\Timestamp.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\Platform.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\Exception.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\_winhttp.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="lwhp\UnWindows.h">
+      <Filter>Header Files\lwhp</Filter>
+    </ClInclude>
+    <ClInclude Include="commands.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="srdi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="slack_auth.txt" />
+  </ItemGroup>
+</Project>
