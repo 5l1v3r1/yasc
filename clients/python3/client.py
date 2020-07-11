@@ -17,7 +17,7 @@ import slack
 
 # Need to derive a build script to autopopulate the following:
 SLACK_AUTHENTICATION = {
-    "oauth_token": "xoxp-869484875895-856157625219-869979229046-028a1e320b5d2f552a748bac71e011ac",
+    "oauth_token": "this_is_why_we_cant_have_nice_things",
     "c2_channel": "#c2_admin"
 }
 
